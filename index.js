@@ -24,6 +24,7 @@ app.get('/', (req, res) => {
 
 
 // now local server is deployed to heroku and connected with mongodb now 
+// want heroku link
 
 
 
@@ -40,6 +41,12 @@ async function run() {
             const cursor = productsCollection.find(query)
             const product = await cursor.toArray()
             res.send(product)
+
+
+        })
+
+        app.get('', async (req, res) => {
+
         })
 
     }
