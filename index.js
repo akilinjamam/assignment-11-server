@@ -45,8 +45,12 @@ async function run() {
 
         })
 
-        app.get('', async (req, res) => {
+        app.post('/products', async (req, res) => {
 
+            const newProducts = req.body;
+            const result = productsCollection.insertOne(newProducts);
+            console.log('adding new user', newProducts);
+            res.send(result);
         })
 
     }
