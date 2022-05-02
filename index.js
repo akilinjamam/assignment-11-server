@@ -1,4 +1,4 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 const express = require('express')
 const app = express();
@@ -44,13 +44,20 @@ async function run() {
 
 
         })
-
+        // to add new items in the db from UI
         app.post('/products', async (req, res) => {
 
             const newProducts = req.body;
             const result = productsCollection.insertOne(newProducts);
             console.log('adding new user', newProducts);
             res.send(result);
+        })
+        // for product detailed with id
+        app.get('/products/:id', async (req, res) => {
+            const id = req.params.id
+            const query = { _id: ObjectId(id) }
+            const product = await productsCollection.findOne(query)
+            res.send(product)
         })
 
     }
