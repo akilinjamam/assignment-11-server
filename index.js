@@ -53,12 +53,21 @@ async function run() {
             console.log('adding new user', newProducts);
             res.send(result);
         })
-        // for product detailed with id
+        // for product detailed and add your item with id
         app.get('/products/:id', async (req, res) => {
             const id = req.params.id
             const query = { _id: ObjectId(id) }
             const product = await productsCollection.findOne(query)
             res.send(product)
+        })
+
+
+        app.get('/addYourItem/:id', async (req, res) => {
+            const id = req.params.id
+            const query = { _id: ObjectId(id) };
+            const items = await productsCollection.findOne(query);
+            res.send(items);
+
         })
 
         // updating data to database from UI 
