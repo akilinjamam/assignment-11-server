@@ -34,6 +34,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run() {
     await client.connect()
     const productsCollection = client.db('exertion').collection('products')
+    const myItemCollection = client.db('exertion').collection('myItem')
 
     try {
         app.get('/products', async (req, res) => {
@@ -85,6 +86,24 @@ async function run() {
             const result = await productsCollection.deleteOne(query);
             res.send(result);
 
+        })
+
+        // my item collection api
+
+        app.get('/myItem', async (req, res) => {
+
+            const email = req.query.email
+            const query = { email: email }
+            const cursor = myItemCollection.find(query)
+            const myItems = await cursor.toArray()
+            res.send(myItems)
+        })
+
+        app.post('/myItem', async (req, res) => {
+
+            const myItem = req.body
+            const result = myItemCollection.insertOne(myItem)
+            res.send(result)
         })
 
     }
