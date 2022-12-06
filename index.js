@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 
 // now local server is deployed to heroku and connected with mongodb now 
 // want heroku link
-
+// hellow
 
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.8ajdo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
@@ -35,6 +35,8 @@ async function run() {
     await client.connect()
     const productsCollection = client.db('exertion').collection('products')
     const myItemCollection = client.db('exertion').collection('myItem')
+
+
 
     try {
         app.get('/products', async (req, res) => {
